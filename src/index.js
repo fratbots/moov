@@ -13,9 +13,9 @@ var MapView = require('react-native-maps');
 var Moov = React.createClass({
     render: function() {
         return (
-            <View style={{}}>
+            <View style={styles.container}>
                 <MapView
-                    style={{width:1080, height:1920}}
+                    style={styles.map}
                     initialRegion={{
                         latitude: 37.78825,
                         longitude: -122.4324,
@@ -25,6 +25,17 @@ var Moov = React.createClass({
                 />
             </View>
         );
+    }
+});
+
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+    },
+    map: {
+        flex: 1,
+        flexDirection: 'column',
     }
 });
 
