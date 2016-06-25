@@ -53,11 +53,14 @@ var Btn = React.createClass ({
 var styles = StyleSheet.create({
     buttonContainer: {
         position: 'absolute',
-        bottom: 0,
+        bottom: 20,
         left: 20,
-        height: 50,
     },
     button: {
+        backgroundColor: '#ffffff',
+        flex: 1,
+        justifyContent: 'center',
+        padding: 10,
     },
     buttonText: {
     },
