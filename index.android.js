@@ -12,30 +12,53 @@ import {
   View
 } from 'react-native';
 
+var MapView = require('react-native-maps');
+
+//const requireNativeComponent = require('requireNativeComponent');
+//
+//const RCTMap = requireNativeComponent('RCTMap', MapView, {
+//  nativeOnly: {
+//    onAnnotationDragStateChange: true,
+//    onAnnotationFocus: true,
+//    onAnnotationBlur: true,
+//    onChange: true,
+//    onPress: true
+//  }
+//});
+
 class Moov extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+        <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: 37.78825,
+              longitude: -122.4324,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}
+          />
     );
   }
 }
 
 const styles = StyleSheet.create({
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'space-around'
+  },
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'blue',
+    justifyContent: 'space-around'
   },
   welcome: {
     fontSize: 20,
