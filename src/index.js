@@ -10,6 +10,11 @@ var {
 } = ReactNative;
 var MapView = require('react-native-maps');
 var Btn = require('Btn');
+var Geo = new(require('Geo'));
+
+Geo.setCallback(function(track) {
+    console.warn("track", track);
+});
 
 var Moov = React.createClass({
     render: function() {
