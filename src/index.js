@@ -1,19 +1,24 @@
 'use strict';
 
-var React = require('react');
-var ReactNative = require('react-native');
-var {
+import React, {
+  Component,
+} from 'react';
+
+import {
     View,
     Text,
     StyleSheet,
     AppRegistry,
-} = ReactNative;
-var MapView = require('react-native-maps');
+    TouchableOpacity
+} from 'react-native';
+
+import MapView from 'react-native-maps';
 
 var Moov = React.createClass({
     render: function() {
         return (
             <View style={styles.container}>
+                <View style={styles.container}>
                 <MapView
                     style={styles.map}
                     initialRegion={{
@@ -23,12 +28,18 @@ var Moov = React.createClass({
                         longitudeDelta: 0.0421,
                     }}
                 />
+                </View>
+                <ButtonStart style></ButtonStart>
             </View>
         );
     }
 });
 
 var styles = StyleSheet.create({
+    button_touchable: {
+        flex: 1,
+        flexDirection: 'column',
+    },
     container: {
         flex: 1,
         flexDirection: 'column',
