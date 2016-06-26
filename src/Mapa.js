@@ -65,7 +65,15 @@ var Mapa = React.createClass({
     },
 
     renderObjs: function() {
-        return;
+        var inc = 0
+        return this.state.objs.map(function(o) {
+            return (
+              <MapView.Marker
+                coordinate={{latitude: o.lat, longitude: o.lon}}
+                key={inc++}
+                />
+            )
+        });
     },
 
     render: function() {
