@@ -8,45 +8,46 @@ var {
     View,
     Text,
 } = ReactNative;
-var MapView = require('react-native-maps');
 var Btn = require('Btn');
 var Geo = new(require('Geo'));
-
-Geo.setCallback(function(track) {
-    console.warn("track", track);
-});
+var Mapa = require('Mapa');
 
 var Moov = React.createClass({
     render: function() {
         return (
             <View style={styles.container}>
                 <View style={styles.mapContainer}>
-                    <MapView
-                        style={styles.map}
-                        initialRegion={{
-                            latitude: 55.774332,
-                            longitude: 37.604595,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,
-                        }}
-                    />
+                    <Mapa/>
                 </View>
                 <Btn/>
             </View>
         );
-    }
+    },
 });
+
+var geoCallback = (function(mapa) {
+    return function(track) {
+        console.log("track updated", track);
+        var lastPoint = track.slice(-1)[0];
+        if (!lastPoint) {
+            return;
+        }
+        console.log("mapa", mapa);
+        console.log("mapa setRegion", mapa.setRegion);
+        if (mapa.setRegion) {
+            mapa.setRegion({
+                latitude: lastPoint.coords.latitude,
+                longitude: lastPoint.coords.longitude,
+                latitudeDelta: mapa.LATITUDE_DELTA,
+                longitudeDelta: mapa.LONGITUDE_DELTA,
+            });
+        }
+    };
+}) (Mapa);
+Geo.setCallback(geoCallback);
 
 var styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'column',
-    },
-    mapContainer: {
-        flex: 1,
-        flexDirection: 'column',
-    },
-    map: {
         flex: 1,
         flexDirection: 'column',
     },

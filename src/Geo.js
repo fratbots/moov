@@ -11,6 +11,7 @@ var Geo = function() {
 
 Geo.prototype.setCallback = function(callback) {
     this.callback = callback;
+    console.log("inside callback", callback);
     this.startListen();
 };
 
