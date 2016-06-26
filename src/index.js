@@ -30,12 +30,6 @@ Geo.setCallback(function(track) {
     if (!lastPoint) {
         return;
     }
-    Mapa.setRegion({
-        latitude: lastPoint.coords.latitude,
-        longitude: lastPoint.coords.longitude,
-        latitudeDelta: Mapa.LATITUDE_DELTA,
-        longitudeDelta: Mapa.LONGITUDE_DELTA,
-    });
     fetch('http://localhost:8001/location', {
         method: 'POST',
         headers: {
@@ -55,6 +49,8 @@ Geo.setCallback(function(track) {
             Mapa.setPointOfInterests(obj);
         }
     });
+    Mapa.onTrackIncrease(track)
+//    Liner.points.push(track[-1])
 });
 
 var styles = StyleSheet.create({

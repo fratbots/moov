@@ -19,22 +19,59 @@ const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0422;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-var Mapa = React.createClass({
-    points: [
-        {latitude: 37.75825, longitude: -122.4224},
-        {latitude: 37.76825, longitude: -122.4524},
-        {latitude: 37.73825, longitude: -122.4424},
-        {latitude: 37.74825, longitude: -122.4724},
-    ],
+var Liner = {
+    getLine: function() {
+        return [
+            {latitude: 37.75825, longitude: -122.4224},
+            {latitude: 37.76825, longitude: -122.4524},
+            {latitude: 37.73825, longitude: -122.4424},
+            {latitude: 37.74825, longitude: -122.4724},
+        ]
+    }
+}
 
-    renderPoints: function() {
-        return this.points.map(point => (
-          <MapView.Marker
-            draggable
-            onDragEnd={(e) => this.setState({ x: e.nativeEvent.coordinate })}
-            coordinate={point}
+var Mapa = React.createClass({
+    getInitialState: function () {
+        return {
+            line: [
+                {latitude: 37.75825, longitude: -122.4224},
+                {latitude: 37.76825, longitude: -122.4524},
+                {latitude: 37.73825, longitude: -122.4424},
+                {latitude: 37.74825, longitude: -122.4724},
+            ]
+        }
+    },
+
+    onTrackIncrease: function(track) {
+        var lastPoint = track.slice(-1)[0];
+        if (!lastPoint) {
+            return;
+        }
+//        this.setState({
+//            line: this.state.line.concat(
+//                [{latitude: lastPoint.coords.latitude, longitude: lastPoint.coords.longitude}]
+//            )
+//        })
+        this.setRegion({
+            latitude: lastPoint.coords.latitude,
+            longitude: lastPoint.coords.longitude,
+            latitudeDelta: this.LATITUDE_DELTA,
+            longitudeDelta: this.LONGITUDE_DELTA,
+        });
+    },
+
+    getLine: function() {
+        return this.state.line;
+    },
+
+    renderLine: function() {
+        return (
+          <MapView.Polyline
+            coordinates={this.getLine()}
+            strokeColor="#FF0000"
+            strokeWidth={3}
             />
-        ))
+        )
     },
 
     render: function() {
@@ -49,7 +86,7 @@ var Mapa = React.createClass({
                     longitudeDelta: LONGITUDE_DELTA,
                 }}
             >
-            {this.renderPoints()}
+            {this.renderLine()}
             </MapView>
         );
     },
