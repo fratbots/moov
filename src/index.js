@@ -31,6 +31,10 @@ Geo.setCallback(function(track) {
     if (!lastPoint) {
         return;
     }
+    GLOBAL.EMITTER.emit('change', {
+        line: Geo.getPoints(),
+        objs: Geo.getObjs(),
+    })
     fetch('http://localhost:8001/location', {
         method: 'POST',
         headers: {
