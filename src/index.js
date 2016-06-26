@@ -10,7 +10,7 @@ var {
 } = ReactNative;
 var Btn = require('Btn');
 var Geo = new(require('Geo'));
-var Mapa = new(require('Mapa'));
+var Mapa = require('Mapa');
 var GLOBAL = require('Globals');
 
 var Moov = React.createClass({
@@ -18,7 +18,7 @@ var Moov = React.createClass({
         return (
             <View style={styles.container}>
                 <View style={styles.mapContainer}>
-                    {Mapa.render()}
+                    <Mapa/>
                 </View>
                 <Btn/>
             </View>
@@ -57,8 +57,6 @@ Geo.setCallback(function(track) {
             })
         }
     });
-    Mapa.onTrackIncrease(track)
-//    Liner.points.push(track[-1])
 });
 
 var styles = StyleSheet.create({

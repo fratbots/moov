@@ -19,26 +19,7 @@ const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0422;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-
-var makeChangeEventMixin = function(emitter){
-    return {
-        componentDidMount: function(){
-            emitter.addListener('change', this.__makeChangeEventMixin_handler_);
-        },
-        componentWillUnmount: function(){
-            emitter.removeListener('change', this.__makeChangeEventMixin_handler_);
-        },
-        __makeChangeEventMixin_handler_: function(payload){
-            this.setState(payload);
-        },
-        emitStateChange: function(payload){
-            emitter.emit('change', payload);
-        }
-    };
-};
-
 var Mapa = React.createClass({
-    mixins: [makeChangeEventMixin(GLOBAL.EMITTER)],
     getInitialState: function () {
         return {
             line: [
@@ -49,20 +30,24 @@ var Mapa = React.createClass({
             ]
         }
     },
-
-    //DidMount: {listen to geo objects changed},
-    //DidUnmount: {stop listening},
+    componentDidMount: function() {
+        console.log("sub");
+        GLOBAL.EMITTER.addListener('change', this.makeChangeEventMixin_handler);
+    },
+    componentWillUnmount: function() {
+        console.log("unsub");
+        GLOBAL.EMITTER.removeListener('change', this.makeChangeEventMixin_handler);
+    },
+    makeChangeEventMixin_handler: function(payload) {
+        console.log("__makeChangeEventMixin_handler_");
+        this.setState(payload);
+    },
 
     onTrackIncrease: function(track) {
         var lastPoint = track.slice(-1)[0];
         if (!lastPoint) {
             return;
         }
-//        this.setState({
-//            line: this.state.line.concat(
-//                [{latitude: lastPoint.coords.latitude, longitude: lastPoint.coords.longitude}]
-//            )
-//        })
         this.setRegion({
             latitude: lastPoint.coords.latitude,
             longitude: lastPoint.coords.longitude,
