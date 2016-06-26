@@ -27,19 +27,18 @@ var Mapa = React.createClass({
                 {latitude: 37.76825, longitude: -122.4524},
                 {latitude: 37.73825, longitude: -122.4424},
                 {latitude: 37.74825, longitude: -122.4724},
-            ]
+            ],
+            objs: [],
         }
     },
     componentDidMount: function() {
-        console.log("sub");
         GLOBAL.EMITTER.addListener('change', this.makeChangeEventMixin_handler);
     },
     componentWillUnmount: function() {
-        console.log("unsub");
         GLOBAL.EMITTER.removeListener('change', this.makeChangeEventMixin_handler);
     },
     makeChangeEventMixin_handler: function(payload) {
-        console.log("__makeChangeEventMixin_handler_");
+        console.log("payload", payload);
         this.setState(payload);
 //         console.warn(payload.line)
         var lastPoint = payload.line.slice(-1)[0];
@@ -55,18 +54,18 @@ var Mapa = React.createClass({
         });
     },
 
-    getLine: function() {
-        return this.state.line;
-    },
-
     renderLine: function() {
         return (
           <MapView.Polyline
-            coordinates={this.getLine()}
+            coordinates={this.state.line}
             strokeColor="#FF0000"
             strokeWidth={3}
             />
         )
+    },
+
+    renderObjs: function() {
+        return;
     },
 
     render: function() {
@@ -81,7 +80,8 @@ var Mapa = React.createClass({
                     longitudeDelta: LONGITUDE_DELTA,
                 }}
             >
-            {this.renderLine()}
+                {this.renderLine()}
+                {this.renderObjs()}
             </MapView>
         );
     },

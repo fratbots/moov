@@ -53,7 +53,10 @@ Geo.setCallback(function(track) {
                     {latitude: 39.70825, longitude: -124.4424},
                     {latitude: 39.70825, longitude: -124.4524},
                     {latitude: 39.70825, longitude: -124.4724},
-                ]
+                ],
+                objs: [
+                    {"one": "two"},
+                ],
             })
         }
     });
