@@ -41,16 +41,15 @@ var Mapa = React.createClass({
     makeChangeEventMixin_handler: function(payload) {
         console.log("__makeChangeEventMixin_handler_");
         this.setState(payload);
-    },
-
-    onTrackIncrease: function(track) {
-        var lastPoint = track.slice(-1)[0];
-        if (!lastPoint) {
-            return;
+//         console.warn(payload.line)
+        var lastPoint = payload.line.slice(-1)[0];
+        if (lastPoint == null) {
+            return
         }
+        // this.onTrackIncrease(payload)
         this.setRegion({
-            latitude: lastPoint.coords.latitude,
-            longitude: lastPoint.coords.longitude,
+            latitude: lastPoint.latitude,
+            longitude: lastPoint.longitude,
             latitudeDelta: this.LATITUDE_DELTA,
             longitudeDelta: this.LONGITUDE_DELTA,
         });
