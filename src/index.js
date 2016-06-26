@@ -36,6 +36,25 @@ Geo.setCallback(function(track) {
         latitudeDelta: Mapa.LATITUDE_DELTA,
         longitudeDelta: Mapa.LONGITUDE_DELTA,
     });
+    fetch('http://localhost:8001/location', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            lat: lastPoint.coords.latitude,
+            lng: lastPoint.coords.longitude,
+        })
+    }).then((resp) => {
+        if (resp.status === 200 && resp.ok) {
+            return resp.json();
+        }
+    }).then((obj) => {
+        if (obj) {
+            Mapa.setPointOfInterests(obj);
+        }
+    });
 });
 
 var styles = StyleSheet.create({
