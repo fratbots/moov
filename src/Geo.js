@@ -32,6 +32,7 @@ Geo.prototype.startListen = function() {
     this.watchId = navigator.geolocation.watchPosition(
         (position) => {
             this.track.push(position);
+            console.log("calling callback", this.callback);
             this.callback(this.track);
         },
     );

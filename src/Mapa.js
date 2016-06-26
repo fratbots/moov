@@ -23,7 +23,7 @@ var Mapa = React.createClass ({
     render: function() {
         return (
             <MapView
-                ref="map"
+                ref={(ref) => {this.zimap = ref}}
                 style={styles.map}
                 initialRegion={{
                     latitude: LATITUDE,
@@ -35,10 +35,10 @@ var Mapa = React.createClass ({
         );
     },
     setRegion: function(region) {
-        if (!this.refs) {
-            return;
+        if (this.zimap) {
+            console.log("zimap", this.zimap);
+            this.zimap.animateToRegion(region);
         }
-        this.refs.map.animateToRegion(region);
     },
 });
 

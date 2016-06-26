@@ -25,26 +25,20 @@ var Moov = React.createClass({
     },
 });
 
-var geoCallback = (function(mapa) {
-    return function(track) {
-        console.log("track updated", track);
-        var lastPoint = track.slice(-1)[0];
-        if (!lastPoint) {
-            return;
-        }
-        console.log("mapa", mapa);
-        console.log("mapa setRegion", mapa.setRegion);
-        if (mapa.setRegion) {
-            mapa.setRegion({
-                latitude: lastPoint.coords.latitude,
-                longitude: lastPoint.coords.longitude,
-                latitudeDelta: mapa.LATITUDE_DELTA,
-                longitudeDelta: mapa.LONGITUDE_DELTA,
-            });
-        }
-    };
-}) (Mapa);
-Geo.setCallback(geoCallback);
+Geo.setCallback(function(track) {
+    var m = new Mapa();
+    console.log("track updated", track);
+    var lastPoint = track.slice(-1)[0];
+    if (!lastPoint) {
+        return;
+    }
+    m.setRegion({
+        latitude: lastPoint.coords.latitude,
+        longitude: lastPoint.coords.longitude,
+        latitudeDelta: m.LATITUDE_DELTA,
+        longitudeDelta: m.LONGITUDE_DELTA,
+    });
+});
 
 var styles = StyleSheet.create({
     container: {
