@@ -40,7 +40,7 @@ var Btn = React.createClass({
                     onPress={this.buttonClicked}>
                     <View>
                         <Text style={styles.buttonText}>
-                            Send location
+                            Take a glance at Cupertino
                         </Text>
                     </View>
                 </TouchableElement>

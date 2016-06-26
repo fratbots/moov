@@ -50,9 +50,7 @@ Geo.setCallback(function(track) {
             Geo.storeObj(obj);
             GLOBAL.EMITTER.emit('change', {
                 line: Geo.getPoints(),
-                objs: [
-                    {"one": "two"},
-                ],
+                objs: Geo.getObjs(),
             })
         }
     });

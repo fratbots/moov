@@ -38,9 +38,7 @@ var Mapa = React.createClass({
         GLOBAL.EMITTER.removeListener('change', this.makeChangeEventMixin_handler);
     },
     makeChangeEventMixin_handler: function(payload) {
-        console.log("payload", payload);
         this.setState(payload);
-//         console.warn(payload.line)
         var lastPoint = payload.line.slice(-1)[0];
         if (lastPoint == null) {
             return
@@ -67,10 +65,13 @@ var Mapa = React.createClass({
     renderObjs: function() {
         var inc = 0
         return this.state.objs.map(function(o) {
+            console.log(o);
+            console.log(o.lat);
+            console.log(o.lon);
             return (
               <MapView.Marker
                 coordinate={{latitude: o.lat, longitude: o.lon}}
-                key={inc++}
+                key={o.id}
                 />
             )
         });
