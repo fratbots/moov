@@ -39,7 +39,7 @@ Geo.setCallback(function(track) {
         },
         body: JSON.stringify({
             lat: lastPoint.coords.latitude,
-            lng: lastPoint.coords.longitude,
+            lon: lastPoint.coords.longitude,
         })
     }).then((resp) => {
         if (resp.status === 200 && resp.ok) {
@@ -49,11 +49,7 @@ Geo.setCallback(function(track) {
         if (obj) {
             Geo.storeObj(obj);
             GLOBAL.EMITTER.emit('change', {
-                line: [
-                    {latitude: 39.70825, longitude: -124.4424},
-                    {latitude: 39.70825, longitude: -124.4524},
-                    {latitude: 39.70825, longitude: -124.4724},
-                ],
+                line: Geo.getPoints(),
                 objs: [
                     {"one": "two"},
                 ],

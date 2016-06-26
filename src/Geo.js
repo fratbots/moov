@@ -49,4 +49,13 @@ Geo.prototype.getObjs = function() {
     return this.objs;
 }
 
+Geo.prototype.getPoints = function() {
+    return this.track.map(function(p) {
+        return {
+            "latitude": p.coords.latitude,
+            "longitude": p.coords.longitude,
+        };
+    });
+}
+
 module.exports = Geo;
