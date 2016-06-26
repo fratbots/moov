@@ -11,7 +11,6 @@ var Geo = function() {
 
 Geo.prototype.setCallback = function(callback) {
     this.callback = callback;
-    console.log("inside callback", callback);
     this.startListen();
 };
 
@@ -25,14 +24,13 @@ Geo.prototype.startListen = function() {
         },
         {
             enableHighAccuracy: true,
-            timeout: 2000,
+            timeout: 100,
             maximumAge: 1000,
         }
     );
     this.watchId = navigator.geolocation.watchPosition(
         (position) => {
             this.track.push(position);
-            console.log("calling callback", this.callback);
             this.callback(this.track);
         },
     );

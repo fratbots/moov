@@ -27,7 +27,6 @@ var Btn = React.createClass({
                 lng: 50.5,
             })
         });
-        console.log(result);
     },
     render: function() {
         var TouchableElement = TouchableHighlight;

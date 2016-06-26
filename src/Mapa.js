@@ -16,7 +16,7 @@ var {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 const LATITUDE = 37.78825;
 const LONGITUDE = -122.4324;
-const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.0422;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 var Mapa = React.createClass({
@@ -35,9 +35,8 @@ var Mapa = React.createClass({
         );
     },
     setRegion: function(region) {
-        if (this.zimap) {
-            console.log("zimap", this._zimap);
-            this.zimap.animateToRegion(region);
+        if (this._zimap) {
+            this._zimap.animateToRegion(region);
         }
     },
 });

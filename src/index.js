@@ -10,14 +10,14 @@ var {
 } = ReactNative;
 var Btn = require('Btn');
 var Geo = new(require('Geo'));
-var Mapa = require('Mapa');
+var Mapa = new(require('Mapa'));
 
 var Moov = React.createClass({
     render: function() {
         return (
             <View style={styles.container}>
                 <View style={styles.mapContainer}>
-                    <Mapa/>
+                    {Mapa.render()}
                 </View>
                 <Btn/>
             </View>
@@ -26,17 +26,15 @@ var Moov = React.createClass({
 });
 
 Geo.setCallback(function(track) {
-    var m = new Mapa();
     var lastPoint = track.slice(-1)[0];
     if (!lastPoint) {
         return;
     }
-    console.log("track updated", track);
-    m.setRegion({
+    Mapa.setRegion({
         latitude: lastPoint.coords.latitude,
         longitude: lastPoint.coords.longitude,
-        latitudeDelta: m.LATITUDE_DELTA,
-        longitudeDelta: m.LONGITUDE_DELTA,
+        latitudeDelta: Mapa.LATITUDE_DELTA,
+        longitudeDelta: Mapa.LONGITUDE_DELTA,
     });
 });
 
