@@ -11,6 +11,7 @@ var {
 var Btn = require('Btn');
 var Geo = new(require('Geo'));
 var Mapa = new(require('Mapa'));
+var GLOBAL = require('Globals');
 
 var Moov = React.createClass({
     render: function() {
@@ -46,7 +47,15 @@ Geo.setCallback(function(track) {
         }
     }).then((obj) => {
         if (obj) {
-            Mapa.setPointOfInterests(obj);
+            Geo.storeObj(obj);
+            GLOBAL.EMITTER.emit('change', {
+                line: [
+                    {latitude: 39.73825, longitude: -124.4424},
+                    {latitude: 39.74825, longitude: -124.4724},
+                    {latitude: 39.75825, longitude: -124.4224},
+                    {latitude: 39.76825, longitude: -124.4524},
+                ]
+            })
         }
     });
     Mapa.onTrackIncrease(track)

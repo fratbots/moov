@@ -10,6 +10,7 @@ var {
     Dimensions,
 } = ReactNative;
 var MapView = require('react-native-maps');
+var GLOBAL = require('Globals');
 
 var {width, height} = Dimensions.get('window');
 
@@ -30,7 +31,25 @@ var Liner = {
     }
 }
 
+var makeChangeEventMixin = function(emitter){
+    return {
+        componentDidMount: function(){
+            emitter.addListener('change', this.__makeChangeEventMixin_handler_);
+        },
+        componentWillUnmount: function(){
+            emitter.removeListener('change', this.__makeChangeEventMixin_handler_);
+        },
+        __makeChangeEventMixin_handler_: function(payload){
+            this.setState(payload);
+        },
+        emitStateChange: function(payload){
+            emitter.emit('change', payload);
+        }
+    };
+};
+
 var Mapa = React.createClass({
+    mixins: [makeChangeEventMixin(GLOBAL.EMITTER)],
     getInitialState: function () {
         return {
             line: [
@@ -41,6 +60,9 @@ var Mapa = React.createClass({
             ]
         }
     },
+
+    //DidMount: {listen to geo objects changed},
+    //DidUnmount: {stop listening},
 
     onTrackIncrease: function(track) {
         var lastPoint = track.slice(-1)[0];

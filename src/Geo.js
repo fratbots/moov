@@ -7,6 +7,7 @@ var Geo = function() {
     this.watchId = (null: ?number)
     this.callback = null;
     this.track = [];
+    this.objs = [];
 };
 
 Geo.prototype.setCallback = function(callback) {
@@ -39,5 +40,13 @@ Geo.prototype.startListen = function() {
 Geo.prototype.stopListen =  function() {
     navigator.geolocation.clearWatch(this.watchId);
 };
+
+Geo.prototype.storeObj = function(obj) {
+    this.objs.push(obj);
+}
+
+Geo.prototype.getObjs = function() {
+    return this.objs;
+}
 
 module.exports = Geo;
