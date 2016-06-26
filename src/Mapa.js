@@ -11,7 +11,6 @@ var {
 } = ReactNative;
 var MapView = require('react-native-maps');
 var GLOBAL = require('Globals');
-
 var {width, height} = Dimensions.get('window');
 
 const ASPECT_RATIO = width / height;
@@ -20,16 +19,6 @@ const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0422;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-var Liner = {
-    getLine: function() {
-        return [
-            {latitude: 37.75825, longitude: -122.4224},
-            {latitude: 37.76825, longitude: -122.4524},
-            {latitude: 37.73825, longitude: -122.4424},
-            {latitude: 37.74825, longitude: -122.4724},
-        ]
-    }
-}
 
 var makeChangeEventMixin = function(emitter){
     return {

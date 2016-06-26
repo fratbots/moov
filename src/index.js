@@ -50,10 +50,9 @@ Geo.setCallback(function(track) {
             Geo.storeObj(obj);
             GLOBAL.EMITTER.emit('change', {
                 line: [
-                    {latitude: 39.73825, longitude: -124.4424},
-                    {latitude: 39.74825, longitude: -124.4724},
-                    {latitude: 39.75825, longitude: -124.4224},
-                    {latitude: 39.76825, longitude: -124.4524},
+                    {latitude: 39.70825, longitude: -124.4424},
+                    {latitude: 39.70825, longitude: -124.4524},
+                    {latitude: 39.70825, longitude: -124.4724},
                 ]
             })
         }
