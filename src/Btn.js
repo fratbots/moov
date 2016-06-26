@@ -14,7 +14,7 @@ var {
     TouchableNativeFeedback,
 } = ReactNative;
 
-var Btn = React.createClass ({
+var Btn = React.createClass({
     buttonClicked: function() {
         var result = fetch('http://localhost:8001/location', {
             method: 'POST',

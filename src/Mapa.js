@@ -19,11 +19,11 @@ const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-var Mapa = React.createClass ({
+var Mapa = React.createClass({
     render: function() {
         return (
             <MapView
-                ref={(ref) => {this.zimap = ref}}
+                ref={(ref) => {this._zimap = ref}}
                 style={styles.map}
                 initialRegion={{
                     latitude: LATITUDE,
@@ -36,17 +36,13 @@ var Mapa = React.createClass ({
     },
     setRegion: function(region) {
         if (this.zimap) {
-            console.log("zimap", this.zimap);
+            console.log("zimap", this._zimap);
             this.zimap.animateToRegion(region);
         }
     },
 });
 
 var styles = StyleSheet.create({
-    mapContainer: {
-        flex: 1,
-        flexDirection: 'column',
-    },
     map: {
         flex: 1,
         flexDirection: 'column',

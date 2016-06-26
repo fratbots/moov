@@ -27,11 +27,11 @@ var Moov = React.createClass({
 
 Geo.setCallback(function(track) {
     var m = new Mapa();
-    console.log("track updated", track);
     var lastPoint = track.slice(-1)[0];
     if (!lastPoint) {
         return;
     }
+    console.log("track updated", track);
     m.setRegion({
         latitude: lastPoint.coords.latitude,
         longitude: lastPoint.coords.longitude,
@@ -42,6 +42,10 @@ Geo.setCallback(function(track) {
 
 var styles = StyleSheet.create({
     container: {
+        flex: 1,
+        flexDirection: 'column',
+    },
+    mapContainer: {
         flex: 1,
         flexDirection: 'column',
     },
